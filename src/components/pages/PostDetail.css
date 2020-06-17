@@ -1,0 +1,16 @@
+.svg{
+    width: 20vw;
+    height: 20vh;
+    fill: blue;
+    margin-top: 17%;
+    animation: myAnimate 3s infinite;
+}
+
+@keyframes myAnimate{
+    from{
+        transform: rotate(0);
+    }
+    to{
+        transform: rotate(360deg);
+    }
+}

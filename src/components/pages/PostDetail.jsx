@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 import './PostDetail.css'
 
 const PostDetail = (props) => {
-    const [state, setState] = useState({})
+    const [post, setPost] = useState({})
 
     const id = props.match.params.id
 
@@ -11,19 +11,19 @@ const PostDetail = (props) => {
         fetch(`/api/posts/${id}/`)
             .then(response => response.json())
             .then(data => {
-                setState(data)
+                setPost(data)
             })
-    }, [])
+    }, [id])
 
     return (
-        Object.keys(state).length !== 0 ? (
+        Object.keys(post).length !== 0 ? (
             <div className="d-flex flex-column align-items-center text-center border m-5 p-4">
                 <div>
-                    <img src={state.image} alt="" width="300vw" height="200vh" />
-                    <h1 className="font-weight-light">{state.title}</h1>
-                    <h6 className="font-weight-light">{state.category.name}</h6>
-                    <p className="">{state.description}</p>
-                    <h6 className="font-weight-light">{state.date}</h6>
+                    <img src={post.image} alt="" width="300vw" height="200vh" />
+                    <h1 className="font-weight-light">{post.title}</h1>
+                    <h6 className="font-weight-light">{post.category.name}</h6>
+                    <p className="">{post.description}</p>
+                    <h6 className="font-weight-light">{post.date}</h6>
                 </div>
             </div>
         ) : (

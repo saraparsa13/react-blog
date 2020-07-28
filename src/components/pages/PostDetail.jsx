@@ -1,14 +1,20 @@
 import React, { useState, useEffect } from 'react'
 
 import './PostDetail.css'
+import { useContext } from 'react'
+import { ThemeContext } from '../../context'
 
 const PostDetail = (props) => {
+    const { theme } = useContext(ThemeContext)
+
     const [post, setPost] = useState({})
 
     const id = props.match.params.id
 
     useEffect(() => {
-        fetch(`/api/posts/${id}/`)
+        const token = localStorage.getItem('token')
+
+        fetch(`/api/posts/${id}/`, { headers: { "Authorization": `Token ${token}` } })
             .then(response => response.json())
             .then(data => {
                 setPost(data)
@@ -17,7 +23,7 @@ const PostDetail = (props) => {
 
     return (
         Object.keys(post).length !== 0 ? (
-            <div className="d-flex flex-column align-items-center text-center border m-5 p-4">
+            <div className="d-flex flex-column align-items-center text-center border m-5 p-4" style={theme}>
                 <div>
                     <img src={post.image} alt="" width="300vw" height="200vh" />
                     <h1 className="font-weight-light">{post.title}</h1>

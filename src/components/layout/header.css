@@ -1,0 +1,38 @@
+.button-on {
+    background-color: rgb(39, 247, 101);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: grey solid 1px;
+    position: relative;
+    animation: onAnimation 1s forwards;
+}
+
+.button-off {
+    background-color: rgb(209, 206, 206);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: grey solid 1px;
+    position: relative;
+    animation: offAnimation 1s forwards;
+}
+
+@keyframes onAnimation{
+    from {
+        margin-left: 0;
+    }
+    to {
+        margin-left: 50%;
+    }
+}
+
+@keyframes offAnimation{
+    from {
+        margin-left: 50%;
+    }
+    to {
+        margin-left: 0;
+    }
+}
+

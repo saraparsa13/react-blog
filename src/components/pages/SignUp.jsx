@@ -13,25 +13,29 @@ class SignUp extends Component {
         }
     }
 
+    componentDidMount() {
+        try {
+            if (localStorage.getItem('token')) {
+                this.props.history.push('/')   
+            }
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
     onChange = (e) => {
         this.setState({
             [e.target.name]: e.target.value
         })
     }
 
-
-
-
     onSubmit = (e) => {
         e.preventDefault()
-
-        console.log(this.state)
 
         fetch('/api/accounts/signup/', { method: 'POST', body: JSON.stringify(this.state), headers: { 'Content-Type': 'application/json' } })
             .then(response => response.json())
             .then(data => localStorage.setItem('token', data.token))
-
-        this.props.history.push('/')
+            .then(() => this.props.history.push('/'))
     }
 
     render() {
@@ -51,9 +55,7 @@ class SignUp extends Component {
 
                     <Link to="/login">Already have an account?</Link>
                     <div>
-
                         <button onClick={this.onSubmit} type="submit" className="btn btn-primary m-1">Sign up</button>
-
                     </div>
                 </form>
             </div>

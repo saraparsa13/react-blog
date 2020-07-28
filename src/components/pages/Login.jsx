@@ -21,10 +21,12 @@ class Login extends Component {
         fetch('/api/accounts/login/', { method: 'POST', body: JSON.stringify(this.state), headers: { 'Content-Type': 'application/json' } })
             .then(response => response.json())
             .then(data => {
-                localStorage.getItem('token') === data.token ? console.log('welcome kon') : console.log('signup kon')
+                const token = data.token
+                localStorage.setItem('token', token)
             })
-
-        this.props.history.push('/')
+            .then(() => {
+                this.props.history.push('/')
+            })
     }
 
     render() {
